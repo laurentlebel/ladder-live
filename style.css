@@ -1,51 +1,28 @@
 :root {
-  --bg: #0b0b10;
-  --panel: #15151c;
-  --line: #2a2a38;
-  --text: #e7e7ef;
-  --muted: #a9a9bb;
-  --accent: #4e7cff;
-  --accent-2: #7b9dff;
-  --win: #202a45;
-  --head: #1b1b27;
-  --danger: #ff4d4d;
+  --bg: #0b0b10; --panel: #15151c; --line: #2a2a38; --text: #e7e7ef; --muted: #a9a9bb;
+  --accent: #4e7cff; --win: #202a45; --head: #1b1b27;
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
 #app { max-width: 720px; margin: 0 auto; padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom); }
-.topbar {
-  position: sticky; top: 0; z-index: 3;
-  background: linear-gradient(180deg, rgba(11,11,16,0.98), rgba(11,11,16,0.9) 70%, rgba(11,11,16,0));
-  backdrop-filter: blur(8px);
-  padding: 10px 0 6px;
-}
-.titles { display: flex; flex-direction: column; gap: 2px; }
-h1 { font-size: 20px; margin: 0; }
-.subtitle { margin: 0; color: var(--muted); font-size: 12px; }
-.actions { display: flex; gap: 8px; margin-top: 8px; }
-button {
-  font-size: 15px; padding: 10px 14px; border-radius: 11px;
-  border: 1px solid var(--line); background: var(--panel); color: var(--text);
-}
-button.secondary { background: #1f2230; }
-button.danger { background: #2c1111; border-color: #4b1a1a; color: #ffb7b7; }
-button:active { transform: scale(0.98); }
-.scoreboard { margin-top: 8px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--panel); }
-.row { display: grid; grid-template-columns: 68px 1fr 1fr; border-bottom: 1px solid var(--line); }
-.row:last-child { border-bottom: 0; }
-.cell { padding: 14px 10px; display: flex; align-items: center; justify-content: center; border-left: 1px solid var(--line); min-height: 56px; }
-.cell:first-child { border-left: 0; }
-.head { background: var(--head); font-weight: 600; }
-.rank { color: var(--muted); font-variant-numeric: tabular-nums; }
-.team { cursor: text; }
-.total { font-size: 22px; font-weight: 700; }
-.totals .cell { background: #12121a; }
-.play { font-size: 26px; user-select: none; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-.play.left { background: linear-gradient(180deg, #161a2a, #0f1324); }
-.play.right { background: linear-gradient(180deg, #161a2a, #0f1324); border-left: 1px solid var(--line); }
-.play.win { background: var(--win); }
-.play .star { font-size: 28px; }
-.footer { padding: 10px 6px 0; color: var(--muted); text-align: center; }
+.topbar { position: sticky; top:0; z-index:3; background: linear-gradient(180deg, rgba(11,11,16,0.98), rgba(11,11,16,0.9) 70%, rgba(11,11,16,0)); backdrop-filter: blur(8px); padding: 10px 0 6px; }
+.titles { display:flex; flex-direction:column; gap:2px; }
+h1 { font-size: 20px; margin: 0; } .subtitle { margin: 0; color: var(--muted); font-size: 12px; }
+.actions { display:flex; gap:8px; margin-top:8px; }
+button { font-size:15px; padding:10px 14px; border-radius:11px; border:1px solid var(--line); background: var(--panel); color: var(--text); }
+button.secondary{ background:#1f2230 } .danger{ background:#2c1111; border-color:#4b1a1a; color:#ffb7b7 }
+.scoreboard{ margin-top:8px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background: var(--panel); }
+.row{ display:grid; grid-template-columns: 100px 1fr 1fr; border-bottom:1px solid var(--line) }
+.cell{ padding:14px 10px; display:flex; align-items:center; justify-content:center; border-left:1px solid var(--line); min-height:56px }
+.cell:first-child{ border-left:0 }
+.head{ background: var(--head); font-weight:600 }
+.rank{ color: var(--muted); font-variant-numeric: tabular-nums; gap:6px; flex-direction:column; display:flex }
+.rank .pts{ font-size:11px; color: var(--muted) }
+.total{ font-size:22px; font-weight:700 } .totals .cell{ background:#12121a }
+.play{ font-size:26px; user-select:none; width:100%; height:100%; display:flex; align-items:center; justify-content:center; cursor:pointer }
+.play.left{ background: linear-gradient(180deg, #161a2a, #0f1324) } .play.right{ background: linear-gradient(180deg, #161a2a, #0f1324); border-left:1px solid var(--line) }
+.play.win{ background: var(--win) } .play .star{ font-size:28px }
+.footer{ padding:10px 6px 0; color: var(--muted); text-align:center }
 @media print {
   body { background: white; color: black; }
   #app { max-width: none; padding: 0; }
