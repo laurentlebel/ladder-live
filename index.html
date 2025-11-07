@@ -3,21 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Ladder Live – 5.W.4.T (Points v3)</title>
+  <title>Ladder Live – 5.W.4.T</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="manifest.json?v=3">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="manifest" href="manifest.json?v=4">
+  <link rel="stylesheet" href="style.css?v=4">
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=3').then(reg=>{
-          if (reg.waiting) { reg.waiting.postMessage({type:'SKIP_WAITING'}); }
-        }).catch(console.error);
-      });
-      navigator.serviceWorker.addEventListener('controllerchange', ()=>{
-        // Reload once when the new SW takes control
-        if (!window.__reloaded) { window.__reloaded = true; window.location.reload(); }
+        navigator.serviceWorker.register('sw.js?v=4').catch(console.error);
       });
     }
   </script>
@@ -27,7 +21,6 @@
     <header class="topbar">
       <div class="titles">
         <h1>Ladder Live</h1>
-        <p class="subtitle">Tap : vide → ⭐ 5.W.4.T → ⭐ Opposants | Totaux pondérés (10→1)</p>
       </div>
       <div class="actions">
         <button id="resetBtn" class="danger">Réinitialiser</button>
@@ -39,8 +32,8 @@
     <section class="scoreboard">
       <div class="row header">
         <div class="cell rank head">Rang</div>
-        <div class="cell team head editable" id="teamLeft" title="Touchez pour renommer">5.W.4.T</div>
-        <div class="cell team head editable" id="teamRight" title="Touchez pour renommer">Opposants</div>
+        <div class="cell team head editable" id="teamLeft">5.W.4.T</div>
+        <div class="cell team head editable" id="teamRight">Opposants</div>
       </div>
       <div class="row totals">
         <div class="cell rank head">Total</div>
@@ -50,11 +43,8 @@
 
       <div id="grid"></div>
     </section>
-    <footer class="footer">
-      <small>Pondération: Rang1=10 pts … Rang10=1 pt. Sauvegarde auto locale.</small>
-    </footer>
   </div>
 
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
