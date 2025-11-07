@@ -1,7 +1,7 @@
 {
-  "name": "Ladder Live – 5.W.4.T (Points)",
+  "name": "Ladder Live – 5.W.4.T (Points v3)",
   "short_name": "Ladder Live",
-  "start_url": "./index.html",
+  "start_url": "./index.html?v=3",
   "display": "standalone",
   "background_color": "#0b0b10",
   "theme_color": "#0b0b10",

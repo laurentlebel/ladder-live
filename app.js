@@ -1,7 +1,7 @@
 (function(){
   const ROUNDS = 10;
   const POINTS = [10,9,8,7,6,5,4,3,2,1]; // rang1→10 pts ... rang10→1 pt
-  const KEY = 'ladder-live-v2-points';
+  const KEY = 'ladder-live-v3-points';
 
   const grid = document.getElementById('grid');
   const totalLeftEl = document.getElementById('totalLeft');
@@ -96,8 +96,7 @@
   undoBtn.addEventListener('click', ()=>{
     if (history.length){
       const prev = history.pop();
-      try{ state = JSON.parse(prev); save(); render(); vibrate(6);}catch(e){}
-    }
+      try{ state = JSON.parse(prev); save(); render(); vibrate(6);}catch(e){} }
   });
   shareBtn.addEventListener('click', ()=> window.print() );
 
