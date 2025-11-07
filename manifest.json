@@ -1,0 +1,21 @@
+{
+  "name": "Ladder Live – 5.W.4.T",
+  "short_name": "Ladder Live",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b0b10",
+  "theme_color": "#0b0b10",
+  "description": "Pointage de ladder live : tap pour marquer, totaux instantanés, sauvegarde locale.",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
