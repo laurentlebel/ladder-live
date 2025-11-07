@@ -1,11 +1,11 @@
-const CACHE = 'ladder-live-v4';
+const CACHE = 'ladder-live-v6';
 self.addEventListener('install', (e) => {
   self.skipWaiting();
   e.waitUntil(caches.open(CACHE).then(c => c.addAll([
-    './index.html?v=4',
-    './style.css?v=4',
-    './app.js?v=4',
-    './manifest.json?v=4'
+    './index.html?v=6',
+    './style.css?v=6',
+    './app.js?v=6',
+    './manifest.json?v=6'
   ])));
 });
 self.addEventListener('activate', (e)=>{

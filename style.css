@@ -1,24 +1,50 @@
 :root {
   --bg: #0b0b10; --panel: #15151c; --line: #2a2a38; --text: #e7e7ef; --muted: #a9a9bb;
   --accent: #4e7cff; --win: #202a45; --head: #1b1b27;
+  --scale: 1;
+  --fs-title: calc(20px * var(--scale));
+  --fs-btn:   calc(15px * var(--scale));
+  --fs-total: calc(22px * var(--scale));
+  --fs-cell:  calc(26px * var(--scale));
+  --pad-btn:  calc(10px * var(--scale)) calc(14px * var(--scale));
+  --pad-cell: calc(12px * var(--scale)) calc(8px * var(--scale));
+  --row-minh: calc(50px * var(--scale));
+  --rank-col: calc(80px * var(--scale));
+  --radius:   calc(12px * var(--scale));
 }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
 #app { max-width: 720px; margin: 0 auto; padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom); }
-.topbar { position: sticky; top:0; z-index:3; background: var(--bg); padding: 10px 0 6px; }
+
+.topbar { position: sticky; top:0; z-index:3; background: var(--bg); padding: calc(8px * var(--scale)) 0 calc(4px * var(--scale)); }
 .titles { display:flex; flex-direction:column; gap:2px; }
-h1 { font-size: 20px; margin: 0; } 
-.actions { display:flex; gap:8px; margin-top:8px; }
-button { font-size:15px; padding:10px 14px; border-radius:11px; border:1px solid var(--line); background: var(--panel); color: var(--text); }
-button.secondary{ background:#1f2230 } .danger{ background:#2c1111; border-color:#4b1a1a; color:#ffb7b7 }
-.scoreboard{ margin-top:8px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background: var(--panel); }
-.row{ display:grid; grid-template-columns: 100px 1fr 1fr; border-bottom:1px solid var(--line) }
-.cell{ padding:14px 10px; display:flex; align-items:center; justify-content:center; border-left:1px solid var(--line); min-height:56px }
+h1 { font-size: var(--fs-title); margin: 0; }
+
+.scoreboard{ margin-top: calc(6px * var(--scale)); border:1px solid var(--line); border-radius: var(--radius); overflow:hidden; background: var(--panel); }
+.row{ display:grid; grid-template-columns: var(--rank-col) 1fr 1fr; border-bottom:1px solid var(--line) }
+.cell{ padding: var(--pad-cell); display:flex; align-items:center; justify-content:center; border-left:1px solid var(--line); min-height: var(--row-minh) }
 .cell:first-child{ border-left:0 }
 .head{ background: var(--head); font-weight:600 }
 .rank{ color: var(--muted); font-variant-numeric: tabular-nums; display:flex; align-items:center; justify-content:center }
-.total{ font-size:22px; font-weight:700 } .totals .cell{ background:#12121a }
-.play{ font-size:26px; user-select:none; width:100%; height:100%; display:flex; align-items:center; justify-content:center; cursor:pointer }
+.total{ font-size: var(--fs-total); font-weight:700 } .totals .cell{ background:#12121a }
+.play{ font-size: var(--fs-cell); user-select:none; width:100%; height:100%; display:flex; align-items:center; justify-content:center; cursor:pointer }
 .play.left{ background: linear-gradient(180deg, #161a2a, #0f1324) } 
 .play.right{ background: linear-gradient(180deg, #161a2a, #0f1324); border-left:1px solid var(--line) }
-.play.win{ background: var(--win) } .play .star{ font-size:28px }
+.play.win{ background: var(--win) } .play .star{ font-size: 1em }
+
+.actions { display:flex; gap: calc(8px * var(--scale)); margin-top: calc(8px * var(--scale)); }
+.bottom-actions { justify-content: center; }
+button { font-size: var(--fs-btn); padding: var(--pad-btn); border-radius: var(--radius); border: 1px solid var(--line); background: var(--panel); color: var(--text); }
+button.secondary{ background:#1f2230 } .danger{ background:#2c1111; border-color:#4b1a1a; color:#ffb7b7 }
+button:active { transform: scale(0.98); }
+
+@media print { /* no print button anymore; keep table clean */
+  :root { --scale: 1 !important; }
+  body { background: white; color: black; }
+  #app { max-width: none; padding: 0; }
+  .topbar, .actions { display: none !important; }
+  .scoreboard { border: 1px solid #000; }
+  .row, .cell { border-color: #000; }
+  .head { background: #dfe7ff; }
+  .play.left, .play.right, .totals .cell { background: #eef3ff !important; }
+}

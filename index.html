@@ -6,12 +6,12 @@
   <title>Ladder Live – 5.W.4.T</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="manifest.json?v=4">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="manifest" href="manifest.json?v=6">
+  <link rel="stylesheet" href="style.css?v=6">
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js?v=4').catch(console.error);
+        navigator.serviceWorker.register('sw.js?v=6').catch(console.error);
       });
     }
   </script>
@@ -21,11 +21,6 @@
     <header class="topbar">
       <div class="titles">
         <h1>Ladder Live</h1>
-      </div>
-      <div class="actions">
-        <button id="resetBtn" class="danger">Réinitialiser</button>
-        <button id="undoBtn" class="secondary">Annuler</button>
-        <button id="shareBtn" class="secondary">Imprimer / PDF</button>
       </div>
     </header>
 
@@ -43,8 +38,13 @@
 
       <div id="grid"></div>
     </section>
+
+    <div class="actions bottom-actions">
+      <button id="resetBtn" class="danger">Réinitialiser</button>
+      <button id="undoBtn" class="secondary">Annuler</button>
+    </div>
   </div>
 
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>

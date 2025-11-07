@@ -1,8 +1,9 @@
 (function(){
   const ROUNDS = 10;
   const POINTS = [10,9,8,7,6,5,4,3,2,1];
-  const KEY = 'ladder-live-v4';
+  const KEY = 'ladder-live-v6';
 
+  const app = document.getElementById('app');
   const grid = document.getElementById('grid');
   const totalLeftEl = document.getElementById('totalLeft');
   const totalRightEl = document.getElementById('totalRight');
@@ -10,7 +11,6 @@
   const teamRightEl = document.getElementById('teamRight');
   const resetBtn = document.getElementById('resetBtn');
   const undoBtn = document.getElementById('undoBtn');
-  const shareBtn = document.getElementById('shareBtn');
 
   let state = load() || { teams:{left:'5.W.4.T', right:'Opposants'}, rounds:Array(ROUNDS).fill(0) };
   let history = [];
@@ -26,10 +26,7 @@
     grid.innerHTML = '';
     for (let i=0;i<ROUNDS;i++){
       const row = document.createElement('div'); row.className = 'row';
-
-      const rank = document.createElement('div'); rank.className = 'cell rank';
-      rank.textContent = (i+1).toString();
-
+      const rank = document.createElement('div'); rank.className = 'cell rank'; rank.textContent = (i+1).toString();
       const left = document.createElement('div'); left.className = 'cell';
       const right = document.createElement('div'); right.className = 'cell';
 
@@ -47,20 +44,11 @@
       row.appendChild(rank); row.appendChild(left); row.appendChild(right); 
       grid.appendChild(row);
 
-      leftBtn.addEventListener('click', ()=>{
-        history.push(JSON.stringify(state));
-        state.rounds[i] = state.rounds[i]===1?0:1;
-        if(state.rounds[i]===1) vibrate(8);
-        updateTotals(); save(); render();
-      });
-      rightBtn.addEventListener('click', ()=>{
-        history.push(JSON.stringify(state));
-        state.rounds[i] = state.rounds[i]===2?0:2;
-        if(state.rounds[i]===2) vibrate(8);
-        updateTotals(); save(); render();
-      });
+      leftBtn.addEventListener('click', ()=>{ pushHist(); state.rounds[i] = state.rounds[i]===1?0:1; if(state.rounds[i]===1) vibrate(8); updateTotals(); save(); render(); });
+      rightBtn.addEventListener('click', ()=>{ pushHist(); state.rounds[i] = state.rounds[i]===2?0:2; if(state.rounds[i]===2) vibrate(8); updateTotals(); save(); render(); });
     }
     updateTotals();
+    requestAnimationFrame(autoFit);
   }
 
   function updateTotals(){
@@ -73,35 +61,33 @@
     totalRightEl.textContent = r;
   }
 
+  function pushHist(){ history.push(JSON.stringify(state)); }
+
   function promptRename(side){
     const current = state.teams[side];
     const next = prompt("Nom de l'équipe:", current);
-    if(next && next.trim().length){
-      history.push(JSON.stringify(state));
-      state.teams[side] = next.trim();
-      save(); render();
-    }
+    if(next && next.trim().length){ pushHist(); state.teams[side] = next.trim(); save(); render(); }
   }
-
   teamLeftEl.addEventListener('click', ()=>promptRename('left'));
   teamRightEl.addEventListener('click', ()=>promptRename('right'));
 
   resetBtn.addEventListener('click', ()=>{
-    if(confirm('Réinitialiser tous les rangs ?')){
-      history.push(JSON.stringify(state));
-      state.rounds = Array(ROUNDS).fill(0);
-      save(); render();
-    }
+    if(confirm('Réinitialiser tous les rangs ?')){ pushHist(); state.rounds = Array(ROUNDS).fill(0); save(); render(); }
   });
-
   undoBtn.addEventListener('click', ()=>{
-    if(history.length){
-      const prev = history.pop();
-      try{ state = JSON.parse(prev); save(); render(); vibrate(6);}catch(e){}
-    }
+    if(history.length){ const prev = history.pop(); try{ state = JSON.parse(prev); save(); render(); vibrate(6);}catch(e){} }
   });
 
-  shareBtn.addEventListener('click', ()=>window.print());
+  // Auto-fit scale
+  function setScale(val){ const c = Math.max(0.70, Math.min(1.00, val||1)); document.documentElement.style.setProperty('--scale', c.toString()); }
+  function autoFit(){
+    setScale(1);
+    const rect = app.getBoundingClientRect();
+    const vh = window.innerHeight;
+    if (rect.height > vh){ setScale(vh / rect.height); }
+  }
+  window.addEventListener('resize', ()=> requestAnimationFrame(autoFit));
+  window.addEventListener('orientationchange', ()=> setTimeout(()=>requestAnimationFrame(autoFit), 300));
 
   render();
 })();
